@@ -1,0 +1,1 @@
+export { EntityAzureResourceOverviewCard } from './EntityAzureResourceOverivewCard';
