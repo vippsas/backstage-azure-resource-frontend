@@ -6,10 +6,12 @@ This plugin shows information about Azure resources related to your backstage en
 
 ## Getting started
 
+[First install the backend plugin](https://github.com/ehrnst/backstage-azure-resources-backend). After that follow the below instructions.
+
 Add the following to `packages\app\src\components\catalog\EntityPage.tsx`
 
 ```TypeScript
-import { AzureResourceEntityOverviewCard, EntityAzureSecurityOverviewCard } from '@internal/plugin-azure-resources';
+import { AzureResourceEntityOverviewCard, EntityAzureSecurityOverviewCard } from '@vippsas/plugin-azure-resources';
 ```
 
 ```TypeScript
