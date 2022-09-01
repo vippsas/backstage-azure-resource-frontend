@@ -1,9 +1,9 @@
 {
   "name": "@vippsno/plugin-azure-resources",
   "description": "A backstage plugin for showing Azure resoources",
-  "homepage": "https://github.com/vippsas/backstage-azure-resources-frontend",
+  "homepage": "https://github.com/vippsas/backstage-azure-resource-frontend",
   "bugs": {
-    "url": "https://github.com/vippsas/backstage-azure-resources-frontend/issues"
+    "url": "https://github.com/vippsas/backstage-azure-resource-frontend/issues"
   },
   "contributors": [
   ],
