@@ -11,7 +11,7 @@ This plugin shows information about Azure resources related to your backstage en
 Add the following to `packages\app\src\components\catalog\EntityPage.tsx`
 
 ```TypeScript
-import { AzureResourceEntityOverviewCard, EntityAzureSecurityOverviewCard } from '@vippsas/plugin-azure-resources';
+import { AzureResourceEntityOverviewCard, EntityAzureSecurityOverviewCard } from '@vippsno/plugin-azure-resources';
 ```
 
 ```TypeScript
