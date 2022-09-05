@@ -1,1 +1,2 @@
-export * from './plugin';
+export {azureResourcesPlugin, AzureResourceEntityOverviewCard, EntityAzureSecurityOverviewCard} from './plugin';
+export {AZURE_ANNOTATION_TAG_SELECTOR, tagSelectorFromEntity} from './components/entityData'
