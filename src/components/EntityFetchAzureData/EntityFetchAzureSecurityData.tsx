@@ -1,8 +1,9 @@
 import React from 'react';
-import { Table, TableColumn, Progress } from '@backstage/core-components';
+import { Table, TableColumn, Progress, StatusError, StatusWarning, StatusAborted } from '@backstage/core-components';
+import SecurityIcon from '@material-ui/icons/Security';
 import { useAsync } from 'react-use';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
-import { Chip } from '@material-ui/core';
+import { Box, Chip } from '@material-ui/core';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { AZURE_ANNOTATION_TAG_SELECTOR } from '../entityData';
 
@@ -19,7 +20,7 @@ type SecurityRec = {
 type TableOutput = {
     recommendation: string;
     resources: JSX.Element;
-    severity: string;
+    severity: JSX.Element;
 }
 
 
@@ -43,6 +44,11 @@ export const GetEntityAzureSecurityRecommendations = () => {
         return <div>{error.message}</div>;
     }
 
+    const severityToIndicators: any = {
+        'Low': <StatusAborted>Low</StatusAborted>,
+        'Medium': <StatusWarning>Medium</StatusWarning>,
+        'High': <StatusError>High</StatusError>
+    };
     const recommendations: any = {};
     const secData: TableOutput[] = [];
     (value || []).forEach((item: SecurityRec) => {
@@ -51,7 +57,7 @@ export const GetEntityAzureSecurityRecommendations = () => {
             secData.push({
                 recommendation: item.displayName,
                 resources: <ul>{recommendations[item.displayName]}</ul>,
-                severity: item.severity
+                severity: severityToIndicators[item.severity]
             });
         }
         recommendations[item.displayName].push(<Chip component="a" target="_blank" href={`http://${item.link}`} label={item.resourceName} clickable size='small' variant='outlined'/>)
@@ -65,8 +71,14 @@ export const GetEntityAzureSecurityRecommendations = () => {
 
     return (
         <Table
-            title='Security recommendations'
-            options={{ search: true, paging: false, grouping: true}}
+            title={
+                <Box display="flex" alignItems="center">
+                <SecurityIcon style={{ fontSize: 30 }} />
+                <Box mr={1} />
+                    Security recommendations
+                </Box>
+            }
+            options={{ search: true, paging: true, grouping: true, pageSize: 10}}
             columns={columns}
             data={secData}
         />

@@ -21,7 +21,8 @@ import useAsync from 'react-use/lib/useAsync';
 import Alert from '@material-ui/lab/Alert';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
 import { useEntity } from '@backstage/plugin-catalog-react';
-import { Chip } from '@material-ui/core';
+import { Chip, Box } from '@material-ui/core';
+import FolderOpenIcon from '@material-ui/icons/FolderOpenOutlined';
 import { AZURE_ANNOTATION_TAG_SELECTOR } from '../entityData';
 
 type EntityResourceGroups = {
@@ -64,8 +65,14 @@ export const DenseTable = ({ rgs }: DenseTableProps) => {
 
   return (
     <Table
-      title="Resource groups"
-      options={{ search: false, paging: false }}
+      title={
+        <Box display="flex" alignItems="center">
+          <FolderOpenIcon style={{ fontSize: 30 }} />
+        <Box mr={1} />
+            Resource groups
+        </Box>
+      }
+      options={{ search: false, paging: true, pageSize: 10 }}
       columns={columns}
       data={data}
     />
