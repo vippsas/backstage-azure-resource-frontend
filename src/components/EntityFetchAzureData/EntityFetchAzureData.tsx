@@ -21,7 +21,8 @@ import useAsync from 'react-use/lib/useAsync';
 import Alert from '@material-ui/lab/Alert';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
 import { useEntity } from '@backstage/plugin-catalog-react';
-import { Chip } from '@material-ui/core';
+import { Chip, Box } from '@material-ui/core';
+import FolderOpenIcon from '@material-ui/icons/FolderOpenOutlined';
 import { AZURE_ANNOTATION_TAG_SELECTOR } from '../entityData';
 
 type EntityResourceGroups = {
@@ -39,6 +40,7 @@ type DenseTableProps = {
 export const DenseTable = ({ rgs }: DenseTableProps) => {
 
   const columns: TableColumn[] = [
+    { title: 'Id', field: 'id', hidden: true },
     { title: 'Resource Group', field: 'resourceGroup' },
     { title: 'Tags', field: 'tags' }
   ];
@@ -49,23 +51,26 @@ export const DenseTable = ({ rgs }: DenseTableProps) => {
         if (Object.prototype.hasOwnProperty.call(r.tags, t)) {
             const label = `${t}: ${r.tags[t]}`;
             const tagLink = `https://portal.azure.com/#blade/HubsExtension/BrowseResourcesWithTag/tagName/${t}/tagValue/${encodeURIComponent(r.tags[t])}`;
-            tags.push(<Chip component="a" target="_blank" href={tagLink} label={label} size='small' />);
+            tags.push(<Chip component="a" target="_blank" href={tagLink} label={label} variant='outlined' clickable size='small' />);
         }
     }
     return {
         resourceGroup: <a target="_blank" href={`https://portal.azure.com/resource${r.id}`}>{r.resourceGroup}</a>,
         tags: tags,
+        id: r.id
     };
 });
 
-  if (data.length === 0) {
-    return <div>yo</div>
-  }
-
   return (
     <Table
-      title="Resource groups"
-      options={{ search: false, paging: false }}
+      title={
+        <Box display="flex" alignItems="center">
+          <FolderOpenIcon style={{ fontSize: 30 }} />
+        <Box mr={1} />
+            Resource groups
+        </Box>
+      }
+      options={{ search: false, paging: true, pageSize: 10 }}
       columns={columns}
       data={data}
     />
