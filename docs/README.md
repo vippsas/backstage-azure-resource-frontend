@@ -17,20 +17,30 @@ yarn add --cwd packages/app @vippsno/plugin-azure-resources
 Add the following to `packages\app\src\components\catalog\EntityPage.tsx`
 
 ```TypeScript
-import { AzureResourceEntityOverviewCard, EntityAzureSecurityOverviewCard } from '@vippsno/plugin-azure-resources';
+import { AzureResourceEntityOverviewCard, AZURE_ANNOTATION_TAG_SELECTOR, EntityAzureSecurityOverviewCard, isAzureResourceEnabled } from '@vippsno/plugin-azure-resources';
 ```
 
 ```TypeScript
 const azureResourceContent = (
-  <Grid container spacing={3} alignItems="stretch">
-    <Grid item md={6}>
-      <AzureResourceEntityOverviewCard />
+  <EntitySwitch>
+    <EntitySwitch.Case if={isAzureResourceEnabled}>
+    <Grid container spacing={3} alignItems="stretch">
+      <Grid item md={6}>
+        <AzureResourceEntityOverviewCard />
+      </Grid>
+      <Grid item md={6}>
+        <EntityAzureSecurityOverviewCard />
+      </Grid>
     </Grid>
-    <Grid item md={6}>
-      <EntityAzureSecurityOverviewCard />
-    </Grid>
-  </Grid>
+    </EntitySwitch.Case>
+    <EntitySwitch.Case>
+      <>
+        <MissingAnnotationEmptyState annotation={AZURE_ANNOTATION_TAG_SELECTOR} />
+      </>
+    </EntitySwitch.Case>
+  </EntitySwitch>
 );
+
 ```
 
 ```TypeScript
