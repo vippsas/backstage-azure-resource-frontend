@@ -3,7 +3,7 @@ import { Table, TableColumn, Progress, StatusError, StatusWarning, StatusAborted
 import SecurityIcon from '@material-ui/icons/Security';
 import { useAsync } from 'react-use';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
-import { Box, Chip, Hidden } from '@material-ui/core';
+import { Box, Chip } from '@material-ui/core';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { AZURE_ANNOTATION_TAG_SELECTOR } from '../entityData';
 
@@ -20,7 +20,7 @@ type SecurityRec = {
 type TableOutput = {
     recommendation: string;
     resources: JSX.Element;
-    severity: any;
+    severity: number;
     id: number;
 }
 
@@ -45,10 +45,16 @@ export const GetEntityAzureSecurityRecommendations = () => {
         return <div>{error.message}</div>;
     }
 
-    const severityToIndicators: any = {
-        'Low': <StatusAborted>Low</StatusAborted>,
-        'Medium': <StatusWarning>Medium</StatusWarning>,
-        'High': <StatusError>High</StatusError>
+    const severityToNumber: any = {
+        'Low': 1,
+        'Medium': 2,
+        'High': 3
+    };
+
+    const severityToIndicator: any = {
+        '1': <StatusAborted>Low</StatusAborted>,
+        '2': <StatusWarning>Medium</StatusWarning>,
+        '3': <StatusError>High</StatusError>
     };
 
     const recommendations: any = {};
@@ -60,7 +66,7 @@ export const GetEntityAzureSecurityRecommendations = () => {
                 id: index,
                 recommendation: item.displayName,
                 resources: <ul>{recommendations[item.displayName]}</ul>,
-                severity: severityToIndicators[item.severity]
+                severity: severityToNumber[item.severity]
             });
         }
         recommendations[item.displayName].push(<Chip component="a" target="_blank" href={`http://${item.link}`} label={item.resourceName} clickable size='small' variant='outlined'/>)
@@ -69,7 +75,13 @@ export const GetEntityAzureSecurityRecommendations = () => {
     const columns: TableColumn[] = [
         { title: 'Recommendation', field: 'recommendation', defaultGroupOrder: 0},
         { title: 'Resource', field: 'resources', sorting: false},
-        { title: 'Severity', field: 'severity', defaultSort: 'asc', sorting: true},
+        { title: 'Severity', field: 'severity', defaultSort: 'desc', sorting: true,
+            render: (row: Partial<TableOutput>) => {
+                if (row.severity) {
+                    return severityToIndicator[row.severity]
+                }
+            }         
+        },
         { title: 'Id', field: 'id', hidden: true}
     ];
 
