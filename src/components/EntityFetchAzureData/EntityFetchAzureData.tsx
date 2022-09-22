@@ -50,7 +50,7 @@ export const DenseTable = ({ rgs }: DenseTableProps) => {
         if (Object.prototype.hasOwnProperty.call(r.tags, t)) {
             const label = `${t}: ${r.tags[t]}`;
             const tagLink = `https://portal.azure.com/#blade/HubsExtension/BrowseResourcesWithTag/tagName/${t}/tagValue/${encodeURIComponent(r.tags[t])}`;
-            tags.push(<Chip component="a" target="_blank" href={tagLink} label={label} size='small' />);
+            tags.push(<Chip component="a" target="_blank" href={tagLink} label={label} variant='outlined' clickable size='small' />);
         }
     }
     return {
