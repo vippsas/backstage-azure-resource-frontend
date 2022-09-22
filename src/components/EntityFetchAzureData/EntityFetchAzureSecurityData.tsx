@@ -3,7 +3,7 @@ import { Table, TableColumn, Progress, StatusError, StatusWarning, StatusAborted
 import SecurityIcon from '@material-ui/icons/Security';
 import { useAsync } from 'react-use';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
-import { Box, Chip } from '@material-ui/core';
+import { Box, Chip, Hidden } from '@material-ui/core';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { AZURE_ANNOTATION_TAG_SELECTOR } from '../entityData';
 
@@ -20,7 +20,8 @@ type SecurityRec = {
 type TableOutput = {
     recommendation: string;
     resources: JSX.Element;
-    severity: JSX.Element;
+    severity: any;
+    id: number;
 }
 
 
@@ -49,12 +50,14 @@ export const GetEntityAzureSecurityRecommendations = () => {
         'Medium': <StatusWarning>Medium</StatusWarning>,
         'High': <StatusError>High</StatusError>
     };
+
     const recommendations: any = {};
     const secData: TableOutput[] = [];
-    (value || []).forEach((item: SecurityRec) => {
+    (value || []).forEach((item: SecurityRec, index: number) => {
         if(!recommendations[item.displayName]){
             recommendations[item.displayName] = []
             secData.push({
+                id: index,
                 recommendation: item.displayName,
                 resources: <ul>{recommendations[item.displayName]}</ul>,
                 severity: severityToIndicators[item.severity]
@@ -65,8 +68,9 @@ export const GetEntityAzureSecurityRecommendations = () => {
 
     const columns: TableColumn[] = [
         { title: 'Recommendation', field: 'recommendation', defaultGroupOrder: 0},
-        { title: 'Resource', field: 'resources'},
-        { title: 'Severity', field: 'severity'}
+        { title: 'Resource', field: 'resources', sorting: false},
+        { title: 'Severity', field: 'severity', defaultSort: 'asc', sorting: true},
+        { title: 'Id', field: 'id', hidden: true}
     ];
 
     return (
@@ -78,7 +82,7 @@ export const GetEntityAzureSecurityRecommendations = () => {
                     Security recommendations
                 </Box>
             }
-            options={{ search: true, paging: true, grouping: true, pageSize: 10}}
+            options={{ search: false, paging: true, grouping: true, pageSize: 10, sorting: true}}
             columns={columns}
             data={secData}
         />

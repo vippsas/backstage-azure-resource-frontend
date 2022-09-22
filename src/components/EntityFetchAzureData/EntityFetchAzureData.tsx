@@ -40,6 +40,7 @@ type DenseTableProps = {
 export const DenseTable = ({ rgs }: DenseTableProps) => {
 
   const columns: TableColumn[] = [
+    { title: 'Id', field: 'id', hidden: true },
     { title: 'Resource Group', field: 'resourceGroup' },
     { title: 'Tags', field: 'tags' }
   ];
@@ -56,12 +57,9 @@ export const DenseTable = ({ rgs }: DenseTableProps) => {
     return {
         resourceGroup: <a target="_blank" href={`https://portal.azure.com/resource${r.id}`}>{r.resourceGroup}</a>,
         tags: tags,
+        id: r.id
     };
 });
-
-  if (data.length === 0) {
-    return <div>yo</div>
-  }
 
   return (
     <Table
