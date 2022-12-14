@@ -25,3 +25,12 @@ export const EntityAzureSecurityOverviewCard = azureResourcesPlugin.provide(
     mountPoint: rootRouteRef,
   }),
 );
+
+export const EntityAzureCostAdviceOverviewCard = azureResourcesPlugin.provide(
+  createRoutableExtension({
+    name: 'Cost advice recommendations',
+    component: () =>
+      import('./components/EntityAzureCostAdviceCard').then(m => m.EntityAzureCostAdviceCard),
+    mountPoint: rootRouteRef,
+  }),
+);

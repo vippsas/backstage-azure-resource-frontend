@@ -1,0 +1,1 @@
+export { EntityAzureCostAdviceCard } from './EntityAzureCostAdviceOverviewCard';
