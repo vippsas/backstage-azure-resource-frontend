@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 import { InfoCard } from "@backstage/core-components";
-import { GetEntityAzureCostAdvice } from "../EntityFetchAzureData";
+import { GetEntityAzureResourceGroups } from "../EntityFetchAzureData";
 
 
 export const EntityAzureCostAdviceCard = () => {
@@ -10,7 +10,7 @@ export const EntityAzureCostAdviceCard = () => {
             <Grid item>
                 <InfoCard>
                     <Typography variant="body2">
-                        <GetEntityAzureCostAdvice />
+                        <GetEntityAzureResourceGroups />
                     </Typography>
                 </InfoCard>
             </Grid>
