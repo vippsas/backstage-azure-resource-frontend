@@ -3,7 +3,7 @@ import { Table, TableColumn, Progress, StatusError, StatusWarning, StatusAborted
 import SecurityIcon from '@material-ui/icons/Security';
 import { useAsync } from 'react-use';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
-import { Box, Chip } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { AZURE_ANNOTATION_TAG_SELECTOR } from '../entityData';
 
