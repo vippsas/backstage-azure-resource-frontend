@@ -10,6 +10,7 @@ import { AZURE_ANNOTATION_TAG_SELECTOR } from '../entityData';
 type CostAdvice = {
     solution: string;
     impact: string;
+    currency: string;
     sum_savings: string;
 }
 
@@ -60,7 +61,7 @@ export const GetEntityAzureCostAdvice = () => {
             secData.push({
                 id: index,
                 advice: item.solution,
-                costSavings: item.sum_savings + ' NOK',
+                costSavings: item.sum_savings + ' ' + item.currency,
                 severity: severityToNumber[item.impact]
             });
         }
