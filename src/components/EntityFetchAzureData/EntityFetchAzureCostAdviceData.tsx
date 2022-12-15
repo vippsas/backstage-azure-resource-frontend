@@ -15,7 +15,7 @@ type CostAdvice = {
 
 type TableOutput = {
     advice: string;
-    resources: JSX.Element;
+    costSavings: string;
     severity: number;
     id: number;
 }
@@ -60,12 +60,11 @@ export const GetEntityAzureCostAdvice = () => {
             secData.push({
                 id: index,
                 advice: item.solution,
-                resources: <ul>{recommendations[item.solution]}</ul>,
+                costSavings: item.sum_savings, 
                 severity: severityToNumber[item.impact]
             });
         }
-        //recommendations[item.solution].push(<Chip component="a" target="_blank" href={`http://${item.link}`} label={item.resourceName} clickable size='small' variant='outlined'/>)
-    }); 
+    });
 
     const columns: TableColumn[] = [
         { title: 'Recommendation', field: 'advice', defaultGroupOrder: 0},
