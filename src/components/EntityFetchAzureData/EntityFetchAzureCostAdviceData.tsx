@@ -67,9 +67,9 @@ export const GetEntityAzureCostAdvice = () => {
     });
 
     const columns: TableColumn[] = [
-        { title: 'Recommendation', field: 'advice', defaultGroupOrder: 0},
-        { title: 'Resource', field: 'resources', sorting: false},
-        { title: 'Severity', field: 'severity', defaultSort: 'desc', sorting: true,
+        { title: 'Recommendation', field: 'advice'},
+        { title: 'Potential savings', field: 'costSavings', sorting: false},
+        { title: 'Impact', field: 'severity', defaultSort: 'desc', sorting: true,
             render: (row: Partial<TableOutput>) => {
                 if (row.severity) {
                     return severityToIndicator[row.severity]
@@ -88,7 +88,7 @@ export const GetEntityAzureCostAdvice = () => {
                     Cost recommendations
                 </Box>
             }
-            options={{ search: false, paging: true, grouping: true, pageSize: 10, sorting: true}}
+            options={{ search: false, paging: true, pageSize: 10, sorting: true}}
             columns={columns}
             data={secData}
         />
