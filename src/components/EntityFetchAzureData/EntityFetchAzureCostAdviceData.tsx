@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, TableColumn, Progress, StatusError, StatusWarning, StatusAborted } from '@backstage/core-components';
-import SecurityIcon from '@material-ui/icons/Security';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import { useAsync } from 'react-use';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
 import { Box } from '@material-ui/core';
@@ -60,7 +60,7 @@ export const GetEntityAzureCostAdvice = () => {
             secData.push({
                 id: index,
                 advice: item.solution,
-                costSavings: item.sum_savings, 
+                costSavings: item.sum_savings + ' NOK',
                 severity: severityToNumber[item.impact]
             });
         }
@@ -83,7 +83,7 @@ export const GetEntityAzureCostAdvice = () => {
         <Table
             title={
                 <Box display="flex" alignItems="center">
-                <SecurityIcon style={{ fontSize: 30 }} />
+                <AttachMoneyIcon style={{ fontSize: 30 }} />
                 <Box mr={1} />
                     Cost recommendations
                 </Box>
