@@ -14,10 +14,10 @@ This plugin shows information about Azure resources related to your backstage en
 yarn add --cwd packages/app @vippsno/plugin-azure-resources
 ```
 
-Add the following to `packages\app\src\components\catalog\EntityPage.tsx`
+Add the following to `packages\app\src\components\catalog\EntityPage.tsx` The below enables all entity cards. Security, Cost advisor, and resource group.
 
 ```TypeScript
-import { AzureResourceEntityOverviewCard, AZURE_ANNOTATION_TAG_SELECTOR, EntityAzureSecurityOverviewCard, isAzureResourceEnabled } from '@vippsno/plugin-azure-resources';
+import { AzureResourceEntityOverviewCard, AZURE_ANNOTATION_TAG_SELECTOR, EntityAzureSecurityOverviewCard,EntityAzureCostAdviceOverviewCard, isAzureResourceEnabled } from '@vippsno/plugin-azure-resources';
 ```
 
 ```TypeScript
@@ -30,6 +30,9 @@ const azureResourceContent = (
       </Grid>
       <Grid item md={6}>
         <EntityAzureSecurityOverviewCard />
+      </Grid>
+      <Grid item md={6}>
+        <EntityAzureCostAdviceOverviewCard />
       </Grid>
     </Grid>
     </EntitySwitch.Case>
