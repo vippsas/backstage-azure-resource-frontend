@@ -27,6 +27,7 @@ import { AZURE_ANNOTATION_TAG_SELECTOR } from '../entityData';
 
 type EntityResourceGroups = {
     id?: string;
+    tenantId?: string;
     name: string;
     tags?: any;
     resourceGroup?: any;
@@ -41,6 +42,7 @@ export const DenseTable = ({ rgs }: DenseTableProps) => {
 
   const columns: TableColumn[] = [
     { title: 'Id', field: 'id', hidden: true },
+    { title: 'TenantId', field: 'tenantId', hidden: true },
     { title: 'Resource Group', field: 'resourceGroup' },
     { title: 'Tags', field: 'tags' }
   ];
@@ -55,7 +57,7 @@ export const DenseTable = ({ rgs }: DenseTableProps) => {
         }
     }
     return {
-        resourceGroup: <a target="_blank" href={`https://portal.azure.com/resource${r.id}`}>{r.resourceGroup}</a>,
+        resourceGroup: <a target="_blank" href={`https://portal.azure.com/#@${r.tenantId}/resource${r.id}`}>{r.resourceGroup}</a>,
         tags: tags,
         id: r.id
     };
