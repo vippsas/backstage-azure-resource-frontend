@@ -31,6 +31,9 @@ export const GetEntityAzureCostAdvice = () => {
     const backendUrl = config.getString('backend.baseUrl');
     const { value, loading, error } = useAsync(async (): Promise<CostAdvice[]> => {
         const response = await fetch(`${backendUrl}/api/azure-resources/rg/${tagKey}/${tagValue}/costadvice`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch cost advice: ${response.status} ${response.statusText}`);
+        }
         const json = await response.json();
         return json.data;
     }, []);

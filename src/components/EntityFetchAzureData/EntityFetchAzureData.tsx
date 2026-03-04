@@ -92,6 +92,9 @@ export const GetEntityAzureResourceGroups = () => {
   const backendUrl = config.getString('backend.baseUrl');
   const { value, loading, error } = useAsync(async (): Promise<EntityResourceGroups[]> => {
       const response = await fetch(`${backendUrl}/api/azure-resources/rg/${tagKey}/${tagValue}`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch resource groups: ${response.status} ${response.statusText}`);
+      }
       const json = await response.json();
       return json.data;
   }, []);
