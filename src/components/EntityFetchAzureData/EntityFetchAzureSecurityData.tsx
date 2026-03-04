@@ -35,6 +35,9 @@ export const GetEntityAzureSecurityRecommendations = () => {
     const backendUrl = config.getString('backend.baseUrl');
     const { value, loading, error } = useAsync(async (): Promise<SecurityRec[]> => {
         const response = await fetch(`${backendUrl}/api/azure-resources/rg/${tagKey}/${tagValue}/secrecommendations`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch security recommendations: ${response.status} ${response.statusText}`);
+        }
         const json = await response.json();
         return json.data;
     }, []);
