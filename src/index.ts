@@ -1,2 +1,13 @@
-export {azureResourcesPlugin, AzureResourceEntityOverviewCard, EntityAzureSecurityOverviewCard, EntityAzureCostAdviceOverviewCard} from './plugin';
-export {AZURE_ANNOTATION_TAG_SELECTOR, tagSelectorFromEntity, isAzureResourceEnabled} from './components/entityData'
+export {
+  azureResourcesPlugin,
+  AzureResourceEntityOverviewCard,
+  EntityAzureSecurityOverviewCard,
+  EntityAzureCostAdviceOverviewCard,
+} from './plugin';
+export {
+  AZURE_ANNOTATION_TAG_SELECTOR,
+  tagSelectorFromEntity,
+  isAzureResourceEnabled,
+} from './components/entityData';
+export { cardPspRouteRef } from './routes';
+export { CardPspGovernanceAtlasPage } from './components/CardPspGovernanceAtlas';

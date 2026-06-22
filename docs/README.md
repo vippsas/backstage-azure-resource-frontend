@@ -2,6 +2,9 @@
 
 This plugin shows information about Azure resources related to your backstage entity
 
+The dev app also includes a dedicated Card PSP governance atlas at `/card-psp`, with the current
+VippsMGMTTest and VippsMGMTProd inventories side by side plus a rollout plan for the PSP copy.
+
 ![backstage azure entity view](./img/entity-view.png)
 
 ## Getting started
